@@ -33,7 +33,7 @@ function generateUniqueId() {
     const randomnum = Math.random();
     const hexadecimalstring = randomnum.toString(16);
 
-    return 'id-${timestamp}{hexadecimalString}';
+    return `id-${timestamp}{hexadecimalString}`;
 
 }
 
@@ -46,7 +46,7 @@ function chatstripe(isAI, value, uniqueid) {
                     src="${isAI ? bot : user}"
                     alt="${isAI ? 'bot': 'user'}" />
             </div>
-            <div class="message" id=${uniqueId}>${value}</div>
+            <div class="message" id=${uniqueid}>${value}</div>
         </div>
         </div>
         `
