@@ -38,7 +38,7 @@ function generateUniqueId() {
 }
 
 function chatstripe(isAI, value, uniqueid) {
-    return (
+    return (`
         < div class="wrapper ${isAI && 'ai'}" >
         <div class="chat">
             <div className="profile">
@@ -46,10 +46,10 @@ function chatstripe(isAI, value, uniqueid) {
                     src="${isAI ? bot : user}"
                     alt="${isAI ? 'bot': 'user'}" />
             </div>
-            <div class="message" id=${uniqueid}>${value}
-            </div>
+            <div class="message" id=${uniqueId}>${value}</div>
         </div>
         </div>
+        `
     )
 }
 
