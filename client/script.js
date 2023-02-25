@@ -22,7 +22,8 @@ function typetext(element, text) {
         if (index < text.length) {
             element.innerHTML += text.CharAt(index);
             index++;
-        } else {
+        } else 
+        {
             clearInterval(interval);
         }
     }, 20)
@@ -30,10 +31,10 @@ function typetext(element, text) {
 
 function generateUniqueId() {
     const timestamp = Date.now();
-    const randomnum = Math.random();
+    const randomnum = Math. random();
     const hexadecimalstring = randomnum.toString(16);
 
-    return `id-${timestamp}{hexadecimalString}`;
+    return `id-${timestamp}-${hexadecimalstring}`;
 
 }
 
@@ -73,6 +74,8 @@ const handlesubmit = async (e) => {
 
 form.addEventListener('submit',handlesubmit);
 form.addEventListener('keyup',(e) => {
-    if (e.keyCode === 13){
-    handlesubmit(e);}
+    if (e.keyCode === 13)
+    {
+    handlesubmit(e);
+}
 })
