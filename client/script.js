@@ -16,15 +16,15 @@ function loader(element) {
     }, 300)
 }
 
-function typetext(element, text) {
-    let index = 0;
+function typeText(element, text) {
+    let index = 0
+  
     let interval = setInterval(() => {
         if (index < text.length) {
-            element.innerHTML += text.CharAt(index);
-            index++;
-        } else 
-        {
-            clearInterval(interval);
+            element.innerHTML += text.charAt(index)
+            index++
+        } else {
+            clearInterval(interval)
         }
     }, 20)
 }
@@ -40,12 +40,12 @@ function generateUniqueId() {
 
 function chatstripe(isAI, value, uniqueid) {
     return (`
-        < div class="wrapper ${isAI && 'ai'}" >
+        <div class="wrapper ${isAI && 'ai'}" >
         <div class="chat">
             <div class="profile">
                 <img
                     src="${isAI ? bot : user}"
-                    alt="${isAI ? 'bot': 'user'}" />
+                    alt="${isAI ? 'bot': 'user'}"/>
             </div>
             <div class="message" id=${uniqueid}>${value}</div>
         </div>
@@ -70,6 +70,32 @@ const handlesubmit = async (e) => {
    const msgdiv = document.getElementById(uniqueid);
    
    loader(msgdiv);
+
+   //fetch data from server - > bot ka response
+   const response = await fetch('http://localhost:8080',{
+    method:'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body : JSON.stringify({
+    prompt: data.get('prompt')
+})
+})
+
+clearInterval(loadinterval);
+msgdiv.innerHTML = "";
+
+if (response.ok) {
+    const data = await response.json();
+    const parsedData = data.bot.trim() 
+
+    typeText(msgdiv, parsedData)
+} else {
+    const err = await response.text()
+
+    msgdiv.innerHTML = "Something went wrong"
+    alert(err)
+}
 }
 
 form.addEventListener('submit',handlesubmit);

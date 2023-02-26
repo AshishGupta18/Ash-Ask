@@ -4,9 +4,9 @@ import cors from 'cors';
 import { Configuration,OpenAIApi } from 'openai';
 
 dotenv.config();
-
+console.log(process.env.OPEN_API_KEY)
 const config = new Configuration({
-    apiKey: process.env.OPENAI_API_KEY,
+    apiKey: process.env.OPEN_API_KEY,
 });
 
 const openai = new OpenAIApi(config);
@@ -38,8 +38,9 @@ app.post('/',async (req,res)=>{
         })
     }
     catch (error){
+
 console.log(error);
-res.status(500).send({error})
+res.status(500).send(error || 'Wrong')
     }
 })
 
